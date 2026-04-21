@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Command Prompt</title>
+    <style>
+        body {
+            background-color: black;
+            color: #cccccc; /* لون الـ CMD الأصلي */
+            font-family: 'Consolas', 'Courier New', monospace;
+            margin: 0;
+            padding: 10px;
+            overflow: hidden;
+            font-size: 14px;
+            line-height: 1.2;
+        }
+        .command-line {
+            display: block;
+            margin-bottom: 2px;
+        }
+        .prefix {
+            color: #cccccc;
+        }
+    </style>
+</head>
+<body onload="startHack()" onclick="goFull()">
+
+    <div id="terminal"></div>
+
+    <script>
+        const terminal = document.getElementById('terminal');
+        const messages = [
+            "C:\\Users\\Admin> taskkill /f /im explorer.exe",
+            "SUCCESS: The process \"explorer.exe\" has been terminated.",
+            "C:\\Users\\Admin> netstat -ano | findstr :80",
+            "TCP    127.0.0.1:80           0.0.0.0:0              LISTENING",
+            "C:\\Users\\Admin> del /f /s /q C:\\Windows\\System32\\*",
+            "Deleting: C:\\Windows\\System32\\drivers\\etc\\hosts",
+            "Deleting: C:\\Windows\\System32\\config\\SAM",
+            "C:\\Users\\Admin> nmap -sP 192.168.1.0/24",
+            "Host 192.168.1.1 is up (0.002s latency).",
+            "C:\\Users\\Admin> spotify --track-analysis --sync",
+            "Analyzing audio stream... [DONE]",
+            "Capturing Spotify process ID: 4412",
+            "Bypassing SSL pinning...",
+            "C:\\Users\\Admin> shutdown /s /t 60 /c \"System Compromised\"",
+            "Access Denied. Escalating privileges...",
+            "Exploit sent to 127.0.0.1...",
+            "Remote Shell established at port 4444"
+        ];
+
+        function startHack() {
+            setInterval(() => {
+                let p = document.createElement('span');
+                p.className = 'command-line';
+                p.innerText = messages[Math.floor(Math.random() * messages.length)];
+                terminal.appendChild(p);
+                
+                // التمرير لأسفل تلقائياً
+                window.scrollTo(0, document.body.scrollHeight);
+                
+                if (terminal.childNodes.length > 50) {
+                    terminal.removeChild(terminal.firstChild);
+                }
+            }, 80); // سرعة فائقة (80 ملي ثانية)
+        }
+
+        function goFull() {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            }
+        }
+    </script>
+</body>
+</html>
